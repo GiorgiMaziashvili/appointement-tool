@@ -28,8 +28,6 @@ const AppointmentForm = () => {
     }
   });
 
-  const selectedDoctorId = watch('doctorId');
-
   useEffect(() => {
     const availableDoctors = getDoctors().filter(doctor => doctor.available);
     setDoctors(availableDoctors);
@@ -90,10 +88,10 @@ const AppointmentForm = () => {
             </div>
           </div>
           <h3 className="text-lg font-semibold text-green-900 mb-2">
-            Appointment Booked Successfully!
+            ვიზიტი წარმატებით დაიჯავშნა!
           </h3>
           <p className="text-green-700 mb-4">
-            Your appointment has been scheduled. You will be redirected to the appointments page shortly.
+            თქვენი ვიზიტი დაიგეგმა. მალე გადაიყვანებით ვიზიტების გვერდზე.
           </p>
           <div className="flex justify-center">
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-green-600"></div>
@@ -108,10 +106,10 @@ const AppointmentForm = () => {
       <div className="bg-white shadow-md rounded-lg">
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-xl font-semibold text-gray-900">
-            Book New Appointment
+            ახალი ვიზიტის ჯავშნა
           </h2>
           <p className="text-sm text-gray-600 mt-1">
-            Fill in the details below to schedule your appointment
+            შეავსეთ ქვემოთ მოცემული ველები თქვენი ვიზიტის დასაჯავშნად
           </p>
         </div>
         
@@ -119,14 +117,14 @@ const AppointmentForm = () => {
           {/* Doctor Selection */}
           <div>
             <label htmlFor="doctorId" className="block text-sm font-medium text-gray-700 mb-2">
-              Select Doctor *
+              აირჩიეთ ექიმი *
             </label>
             <select
               id="doctorId"
-              {...register('doctorId', { required: 'Please select a doctor' })}
+              {...register('doctorId', { required: 'გთხოვთ აირჩიოთ ექიმი' })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
             >
-              <option value="">Choose a doctor...</option>
+              <option value="">აირჩიეთ ექიმი...</option>
               {doctors.map((doctor) => (
                 <option key={doctor.id} value={doctor.id}>
                   {doctor.name} - {doctor.specialty}
@@ -142,13 +140,13 @@ const AppointmentForm = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-2">
-                Appointment Date *
+                ვიზიტის თარიღი *
               </label>
               <input
                 type="date"
                 id="date"
                 min={getMinDate()}
-                {...register('date', { required: 'Please select a date' })}
+                {...register('date', { required: 'გთხოვთ აირჩიოთ თარიღი' })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
               />
               {errors.date && (
@@ -158,14 +156,14 @@ const AppointmentForm = () => {
             
             <div>
               <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-2">
-                Appointment Time *
+                ვიზიტის დრო *
               </label>
               <input
                 type="time"
                 id="time"
                 min={getMinTime(watch('date'))}
                 max="17:00"
-                {...register('time', { required: 'Please select a time' })}
+                {...register('time', { required: 'გთხოვთ აირჩიოთ დრო' })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
               />
               {errors.time && (
@@ -177,22 +175,22 @@ const AppointmentForm = () => {
           {/* Patient Information */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-gray-900 border-b border-gray-200 pb-2">
-              Patient Information
+              პაციენტის ინფორმაცია
             </h3>
             
             <div>
               <label htmlFor="patientName" className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name *
+                სრული სახელი *
               </label>
               <input
                 type="text"
                 id="patientName"
                 {...register('patientName', { 
-                  required: 'Please enter patient name',
-                  minLength: { value: 2, message: 'Name must be at least 2 characters' }
+                  required: 'გთხოვთ შეიყვანოთ პაციენტის სახელი',
+                  minLength: { value: 2, message: 'სახელი უნდა შეიცავდეს მინიმუმ 2 სიმბოლოს' }
                 })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                placeholder="Enter patient's full name"
+                placeholder="შეიყვანეთ პაციენტის სრული სახელი"
               />
               {errors.patientName && (
                 <p className="mt-1 text-sm text-red-600">{errors.patientName.message}</p>
@@ -202,16 +200,16 @@ const AppointmentForm = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="patientEmail" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address *
+                  ელ-ფოსტის მისამართი *
                 </label>
                 <input
                   type="email"
                   id="patientEmail"
                   {...register('patientEmail', { 
-                    required: 'Please enter email address',
+                    required: 'გთხოვთ შეიყვანოთ ელ-ფოსტის მისამართი',
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Please enter a valid email address'
+                      message: 'გთხოვთ შეიყვანოთ სწორი ელ-ფოსტის მისამართი'
                     }
                   })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
@@ -224,20 +222,20 @@ const AppointmentForm = () => {
               
               <div>
                 <label htmlFor="patientPhone" className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone Number *
+                  ტელეფონის ნომერი *
                 </label>
                 <input
                   type="tel"
                   id="patientPhone"
                   {...register('patientPhone', { 
-                    required: 'Please enter phone number',
+                    required: 'გთხოვთ შეიყვანოთ ტელეფონის ნომერი',
                     pattern: {
                       value: /^[\+]?[1-9][\d]{0,15}$/,
-                      message: 'Please enter a valid phone number'
+                      message: 'გთხოვთ შეიყვანოთ სწორი ტელეფონის ნომერი'
                     }
                   })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                  placeholder="+1 (555) 123-4567"
+                  placeholder="+995 (599) 12-34-56"
                 />
                 {errors.patientPhone && (
                   <p className="mt-1 text-sm text-red-600">{errors.patientPhone.message}</p>
@@ -249,14 +247,14 @@ const AppointmentForm = () => {
           {/* Reason for Visit */}
           <div>
             <label htmlFor="reason" className="block text-sm font-medium text-gray-700 mb-2">
-              Reason for Visit
+              ვიზიტის მიზეზი
             </label>
             <textarea
               id="reason"
               rows={4}
               {...register('reason')}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-              placeholder="Please describe the reason for your visit (optional)"
+              placeholder="გთხოვთ აღწეროთ თქვენი ვიზიტის მიზეზი (არასავალდებულო)"
             />
           </div>
 
@@ -267,7 +265,7 @@ const AppointmentForm = () => {
               onClick={() => navigate('/appointments')}
               className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
             >
-              Cancel
+              გაუქმება
             </button>
             <button
               type="submit"
@@ -277,10 +275,10 @@ const AppointmentForm = () => {
               {isSubmitting ? (
                 <div className="flex items-center">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                  Booking...
+                  ვიზიტის ჯავშნა...
                 </div>
               ) : (
-                'Book Appointment'
+                'ვიზიტის ჯავშნა'
               )}
             </button>
           </div>

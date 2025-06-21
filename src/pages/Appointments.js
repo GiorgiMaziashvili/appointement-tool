@@ -105,9 +105,9 @@ const Appointments = () => {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Appointments</h1>
+          <h1 className="text-2xl font-bold text-gray-900">ვიზიტები</h1>
           <p className="mt-1 text-sm text-gray-600">
-            Manage and track all patient appointments.
+            მართეთ და თვალყური მიადევნეთ ყველა პაციენტის ვიზიტებს.
           </p>
         </div>
         <div className="mt-4 sm:mt-0">
@@ -118,7 +118,7 @@ const Appointments = () => {
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
-            Book New Appointment
+            ახალი ვიზიტის ჯავშნა
           </Link>
         </div>
       </div>
@@ -126,11 +126,11 @@ const Appointments = () => {
       {/* Status Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
         {[
-          { key: 'all', label: 'All', color: 'bg-gray-100 text-gray-800' },
-          { key: 'scheduled', label: 'Scheduled', color: 'bg-blue-100 text-blue-800' },
-          { key: 'in-progress', label: 'In Progress', color: 'bg-yellow-100 text-yellow-800' },
-          { key: 'completed', label: 'Completed', color: 'bg-green-100 text-green-800' },
-          { key: 'cancelled', label: 'Cancelled', color: 'bg-red-100 text-red-800' },
+          { key: 'all', label: 'ყველა', color: 'bg-gray-100 text-gray-800' },
+          { key: 'scheduled', label: 'დაგეგმილი', color: 'bg-blue-100 text-blue-800' },
+          { key: 'in-progress', label: 'მიმდინარე', color: 'bg-yellow-100 text-yellow-800' },
+          { key: 'completed', label: 'დასრულებული', color: 'bg-green-100 text-green-800' },
+          { key: 'cancelled', label: 'გაუქმებული', color: 'bg-red-100 text-red-800' },
         ].map((status) => (
           <button
             key={status.key}
@@ -150,17 +150,17 @@ const Appointments = () => {
       {/* Filters and Sort */}
       <div className="bg-white shadow-md rounded-lg p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
-          <h2 className="text-lg font-medium text-gray-900 mb-2 sm:mb-0">Filter & Sort</h2>
+          <h2 className="text-lg font-medium text-gray-900 mb-2 sm:mb-0">ფილტრი და დალაგება</h2>
           <div className="flex items-center space-x-4">
             <button
               onClick={clearFilters}
               className="text-sm font-medium text-primary-600 hover:text-primary-500 transition-colors duration-200"
             >
-              Clear filters
+              ფილტრების გასუფთავება
             </button>
             <div className="flex items-center space-x-2">
               <label htmlFor="sort-select" className="text-sm font-medium text-gray-700">
-                Sort by:
+                დალაგება:
               </label>
               <select
                 id="sort-select"
@@ -168,11 +168,11 @@ const Appointments = () => {
                 onChange={(e) => setSortBy(e.target.value)}
                 className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm"
               >
-                <option value="date-desc">Date (Newest first)</option>
-                <option value="date-asc">Date (Oldest first)</option>
-                <option value="doctor">Doctor name</option>
-                <option value="patient">Patient name</option>
-                <option value="status">Status</option>
+                <option value="date-desc">თარიღი (ახალიდან ძველისკენ)</option>
+                <option value="date-asc">თარიღი (ძველიდან ახალისკენ)</option>
+                <option value="doctor">ექიმის სახელი</option>
+                <option value="patient">პაციენტის სახელი</option>
+                <option value="status">სტატუსი</option>
               </select>
             </div>
           </div>
@@ -182,7 +182,7 @@ const Appointments = () => {
           {/* Doctor Filter */}
           <div>
             <label htmlFor="doctor-filter" className="block text-sm font-medium text-gray-700 mb-1">
-              Doctor
+              ექიმი
             </label>
             <select
               id="doctor-filter"
@@ -190,7 +190,7 @@ const Appointments = () => {
               onChange={(e) => handleFilterChange('doctor', e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm"
             >
-              <option value="">All doctors</option>
+              <option value="">ყველა ექიმი</option>
               {uniqueDoctors.map(doctor => (
                 <option key={doctor} value={doctor}>
                   {doctor}
@@ -202,7 +202,7 @@ const Appointments = () => {
           {/* Date Filter */}
           <div>
             <label htmlFor="date-filter" className="block text-sm font-medium text-gray-700 mb-1">
-              Date
+              თარიღი
             </label>
             <input
               type="date"
@@ -216,14 +216,14 @@ const Appointments = () => {
           {/* Patient Filter */}
           <div>
             <label htmlFor="patient-filter" className="block text-sm font-medium text-gray-700 mb-1">
-              Patient Name
+              პაციენტის სახელი
             </label>
             <input
               type="text"
               id="patient-filter"
               value={filters.patient}
               onChange={(e) => handleFilterChange('patient', e.target.value)}
-              placeholder="Search by patient name..."
+              placeholder="ძებნა პაციენტის სახელით..."
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm"
             />
           </div>
@@ -231,7 +231,7 @@ const Appointments = () => {
           {/* Results Count */}
           <div className="flex items-end">
             <div className="text-sm text-gray-600">
-              <span className="font-medium">{filteredAppointments.length}</span> appointment{filteredAppointments.length !== 1 ? 's' : ''} found
+              <span className="font-medium">{filteredAppointments.length}</span> ვიზიტი ნაპოვნია
             </div>
           </div>
         </div>
@@ -253,11 +253,11 @@ const Appointments = () => {
           <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          <h3 className="mt-2 text-sm font-medium text-gray-900">No appointments found</h3>
+          <h3 className="mt-2 text-sm font-medium text-gray-900">ვიზიტები არ მოიძებნა</h3>
           <p className="mt-1 text-sm text-gray-500">
             {appointments.length === 0
-              ? "No appointments have been booked yet. Start by creating your first appointment."
-              : "No appointments match your current filter criteria. Try adjusting your filters."}
+              ? "ჯერ არ არის დაჯავშნილი ვიზიტები. დაიწყეთ თქვენი პირველი ვიზიტის შექმნით."
+              : "თქვენი ამჟამინდელი ფილტრის კრიტერიუმებს არცერთი ვიზიტი არ შეესაბამება. სცადეთ ფილტრების რეგულირება."}
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
@@ -267,14 +267,14 @@ const Appointments = () => {
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
-              Book New Appointment
+              ახალი ვიზიტის ჯავშნა
             </Link>
             {appointments.length > 0 && (
               <button
                 onClick={clearFilters}
                 className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
               >
-                Clear Filters
+                ფილტრების გასუფთავება
               </button>
             )}
           </div>

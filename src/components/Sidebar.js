@@ -6,7 +6,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const navigation = [
     {
-      name: 'Dashboard',
+      name: 'მთავარი',
       href: '/',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -16,7 +16,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       ),
     },
     {
-      name: 'Doctors',
+      name: 'ექიმები',
       href: '/doctors',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -25,7 +25,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       ),
     },
     {
-      name: 'Add Doctor',
+      name: 'ექიმის დამატება',
       href: '/add-doctor',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -34,7 +34,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       ),
     },
     {
-      name: 'Appointments',
+      name: 'ვიზიტები',
       href: '/appointments',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,7 +43,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       ),
     },
     {
-      name: 'Book Appointment',
+      name: 'ვიზიტის ჯავშნა',
       href: '/book-appointment',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -67,7 +67,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   </svg>
                 </div>
                 <h1 className="ml-3 text-xl font-bold text-gray-900">
-                  Clinic<span className="text-primary-600">Pro</span>
+                  კლინიკა<span className="text-primary-600">პრო</span>
                 </h1>
               </div>
             </div>
@@ -96,10 +96,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
             <div className="flex items-center">
               <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
-                <span className="text-primary-600 text-sm font-medium">A</span>
+                <span className="text-primary-600 text-sm font-medium">ა</span>
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium text-gray-700">Admin User</p>
+                <p className="text-sm font-medium text-gray-700">ადმინისტრატორი</p>
                 <p className="text-xs text-gray-500">admin@clinic.com</p>
               </div>
             </div>
@@ -116,7 +116,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
               className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               onClick={() => setIsOpen(false)}
             >
-              <span className="sr-only">Close sidebar</span>
+              <span className="sr-only">გვერდითი პანელის დახურვა</span>
               <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -131,7 +131,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   </svg>
                 </div>
                 <h1 className="ml-3 text-xl font-bold text-gray-900">
-                  Clinic<span className="text-primary-600">Pro</span>
+                  კლინიკა<span className="text-primary-600">პრო</span>
                 </h1>
               </div>
             </div>

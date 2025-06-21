@@ -6,9 +6,9 @@ const BookAppointment = () => {
     <div className="space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Book Appointment</h1>
+        <h1 className="text-2xl font-bold text-gray-900">ვიზიტის ჯავშნა</h1>
         <p className="mt-1 text-sm text-gray-600">
-          Schedule a new appointment with one of our available doctors.
+          დაჯავშნეთ ვიზიტი ჩვენი კვალიფიციური სამედიცინო სპეციალისტებთან.
         </p>
       </div>
 

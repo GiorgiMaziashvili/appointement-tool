@@ -52,7 +52,7 @@ const Dashboard = () => {
               to={link}
               className="text-sm font-medium text-primary-600 hover:text-primary-500 transition-colors duration-200"
             >
-              View all →
+              ყველას ნახვა →
             </Link>
           </div>
         )}
@@ -62,10 +62,11 @@ const Dashboard = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
+    return date.toLocaleDateString('ka-GE', {
+      weekday: 'short',
+      year: 'numeric',
       month: 'short',
-      day: 'numeric',
-      year: 'numeric'
+      day: 'numeric'
     });
   };
 
@@ -73,10 +74,10 @@ const Dashboard = () => {
     const [hours, minutes] = timeString.split(':');
     const date = new Date();
     date.setHours(parseInt(hours), parseInt(minutes));
-    return date.toLocaleTimeString('en-US', {
+    return date.toLocaleTimeString('ka-GE', {
       hour: 'numeric',
       minute: '2-digit',
-      hour12: true
+      hour12: false
     });
   };
 
@@ -95,20 +96,35 @@ const Dashboard = () => {
     }
   };
 
+  const getStatusText = (status) => {
+    switch (status) {
+      case 'scheduled':
+        return 'დაგეგმილი';
+      case 'completed':
+        return 'დასრულებული';
+      case 'cancelled':
+        return 'გაუქმებული';
+      case 'in-progress':
+        return 'მიმდინარე';
+      default:
+        return status;
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
+        <h1 className="text-2xl font-bold text-gray-900">მთავარი პანელი</h1>
         <p className="mt-1 text-sm text-gray-600">
-          Welcome back! Here's what's happening at your clinic today.
+          კეთილი იყოს თქვენი მობრძანება! აქ არის ინფორმაცია თქვენი კლინიკის შესახებ დღეს.
         </p>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
-          title="Total Doctors"
+          title="სულ ექიმები"
           value={stats.totalDoctors}
           icon={
             <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,7 +136,7 @@ const Dashboard = () => {
         />
         
         <StatCard
-          title="Available Doctors"
+          title="ხელმისაწვდომი ექიმები"
           value={stats.availableDoctors}
           icon={
             <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,7 +147,7 @@ const Dashboard = () => {
         />
         
         <StatCard
-          title="Total Appointments"
+          title="სულ ვიზიტები"
           value={stats.totalAppointments}
           icon={
             <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,7 +159,7 @@ const Dashboard = () => {
         />
         
         <StatCard
-          title="Today's Appointments"
+          title="დღევანდელი ვიზიტები"
           value={stats.todayAppointments}
           icon={
             <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,7 +172,7 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <div className="bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-lg font-medium text-gray-900 mb-4">Quick Actions</h2>
+        <h2 className="text-lg font-medium text-gray-900 mb-4">სწრაფი მოქმედებები</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link
             to="/book-appointment"
@@ -165,7 +181,7 @@ const Dashboard = () => {
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            Book Appointment
+            ვიზიტის ჯავშნა
           </Link>
           
           <Link
@@ -175,7 +191,7 @@ const Dashboard = () => {
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
-            Add New Doctor
+            ექიმის დამატება
           </Link>
           
           <Link
@@ -185,7 +201,7 @@ const Dashboard = () => {
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
-            View All Doctors
+            ყველა ექიმის ნახვა
           </Link>
           
           <Link
@@ -195,7 +211,7 @@ const Dashboard = () => {
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
-            Manage Appointments
+            ვიზიტების მართვა
           </Link>
         </div>
       </div>
@@ -204,12 +220,12 @@ const Dashboard = () => {
       <div className="bg-white shadow-md rounded-lg">
         <div className="px-6 py-4 border-b border-gray-200">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-medium text-gray-900">Recent Appointments</h2>
+            <h2 className="text-lg font-medium text-gray-900">ბოლო ვიზიტები</h2>
             <Link
               to="/appointments"
               className="text-sm font-medium text-primary-600 hover:text-primary-500 transition-colors duration-200"
             >
-              View all →
+              ყველას ნახვა →
             </Link>
           </div>
         </div>
@@ -224,11 +240,11 @@ const Dashboard = () => {
                         {appointment.patientName}
                       </h3>
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(appointment.status)}`}>
-                        {appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
+                        {getStatusText(appointment.status)}
                       </span>
                     </div>
                     <div className="mt-1 flex items-center space-x-4 text-sm text-gray-500">
-                      <span>Dr. {appointment.doctorName}</span>
+                      <span>დოქტორი {appointment.doctorName}</span>
                       <span>•</span>
                       <span>{formatDate(appointment.date)}</span>
                       <span>•</span>
@@ -248,8 +264,8 @@ const Dashboard = () => {
               <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No appointments yet</h3>
-              <p className="mt-1 text-sm text-gray-500">Get started by booking your first appointment.</p>
+              <h3 className="mt-2 text-sm font-medium text-gray-900">ჯერ არ არის ვიზიტები</h3>
+              <p className="mt-1 text-sm text-gray-500">დაიწყეთ თქვენი პირველი ვიზიტის ჯავშნით.</p>
               <div className="mt-6">
                 <Link
                   to="/book-appointment"
@@ -258,7 +274,7 @@ const Dashboard = () => {
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
-                  Book Appointment
+                  ვიზიტის ჯავშნა
                 </Link>
               </div>
             </div>

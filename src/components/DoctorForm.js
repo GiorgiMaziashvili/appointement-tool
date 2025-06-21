@@ -25,47 +25,47 @@ const DoctorForm = () => {
   });
 
   const specialties = [
-    'Cardiology',
-    'Dermatology',
-    'Pediatrics',
-    'Orthopedics',
-    'Neurology',
-    'Radiology',
-    'Ophthalmology',
-    'Psychiatry',
-    'Internal Medicine',
-    'Emergency Medicine',
-    'Family Medicine',
-    'Gynecology',
-    'Oncology',
-    'Urology',
-    'Anesthesiology'
+    'კარდიოლოგია',
+    'დერმატოლოგია',
+    'პედიატრია',
+    'ორთოპედია',
+    'ნევროლოგია',
+    'რადიოლოგია',
+    'ოფთალმოლოგია',
+    'ფსიქიატრია',
+    'შინაგანი მედიცინა',
+    'გადაუდებელი მედიცინა',
+    'ოჯახის მედიცინა',
+    'გინეკოლოგია',
+    'ონკოლოგია',
+    'უროლოგია',
+    'ანესთეზიოლოგია'
   ];
 
-     const onSubmit = async (data) => {
-     setIsSubmitting(true);
-     try {
-       // If no image provided, generate a placeholder
-       if (!data.image) {
-         data.image = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&background=22c55e&color=fff&size=300`;
-       }
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    try {
+      // If no image provided, generate a placeholder
+      if (!data.image) {
+        data.image = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&background=22c55e&color=fff&size=300`;
+      }
 
-       // Convert availability string to boolean
-       data.available = data.available === 'true';
+      // Convert availability string to boolean
+      data.available = data.available === 'true';
 
-       addDoctor(data);
-       setIsSuccess(true);
-       reset();
-       
-       setTimeout(() => {
-         navigate('/doctors');
-       }, 2000);
-     } catch (error) {
-       console.error('Error adding doctor:', error);
-     } finally {
-       setIsSubmitting(false);
-     }
-   };
+      addDoctor(data);
+      setIsSuccess(true);
+      reset();
+      
+      setTimeout(() => {
+        navigate('/doctors');
+      }, 2000);
+    } catch (error) {
+      console.error('Error adding doctor:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (isSuccess) {
     return (
@@ -79,10 +79,10 @@ const DoctorForm = () => {
             </div>
           </div>
           <h3 className="text-lg font-semibold text-green-900 mb-2">
-            Doctor Added Successfully!
+            ექიმი წარმატებით დაემატა!
           </h3>
           <p className="text-green-700 mb-4">
-            The new doctor has been added to the system. You will be redirected to the doctors page shortly.
+            ახალი ექიმი სისტემაში დაემატა. მალე გადაიყვანებით ექიმების გვერდზე.
           </p>
           <div className="flex justify-center">
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-green-600"></div>
@@ -97,10 +97,10 @@ const DoctorForm = () => {
       <div className="bg-white shadow-md rounded-lg">
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-xl font-semibold text-gray-900">
-            Add New Doctor
+            ახალი ექიმის დამატება
           </h2>
           <p className="text-sm text-gray-600 mt-1">
-            Fill in the details below to add a new doctor to the clinic
+            შეავსეთ ქვემოთ მოცემული ველები კლინიკაში ახალი ექიმის დასამატებლად
           </p>
         </div>
         
@@ -108,17 +108,17 @@ const DoctorForm = () => {
           {/* Doctor Name */}
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-              Full Name *
+              სრული სახელი *
             </label>
             <input
               type="text"
               id="name"
               {...register('name', { 
-                required: 'Please enter doctor name',
-                minLength: { value: 2, message: 'Name must be at least 2 characters' }
+                required: 'გთხოვთ შეიყვანოთ ექიმის სახელი',
+                minLength: { value: 2, message: 'სახელი უნდა შეიცავდეს მინიმუმ 2 სიმბოლოს' }
               })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-              placeholder="Dr. John Smith"
+              placeholder="დოქტორი ნიკოლოზ ბერიძე"
             />
             {errors.name && (
               <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
@@ -128,14 +128,14 @@ const DoctorForm = () => {
           {/* Specialty */}
           <div>
             <label htmlFor="specialty" className="block text-sm font-medium text-gray-700 mb-2">
-              Medical Specialty *
+              სამედიცინო სპეციალობა *
             </label>
             <select
               id="specialty"
-              {...register('specialty', { required: 'Please select a specialty' })}
+              {...register('specialty', { required: 'გთხოვთ აირჩიოთ სპეციალობა' })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
             >
-              <option value="">Select a specialty...</option>
+              <option value="">აირჩიეთ სპეციალობა...</option>
               {specialties.map((specialty) => (
                 <option key={specialty} value={specialty}>
                   {specialty}
@@ -150,26 +150,26 @@ const DoctorForm = () => {
           {/* Contact Information */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-gray-900 border-b border-gray-200 pb-2">
-              Contact Information
+              საკონტაქტო ინფორმაცია
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone Number *
+                  ტელეფონის ნომერი *
                 </label>
                 <input
                   type="tel"
                   id="phone"
                   {...register('phone', { 
-                    required: 'Please enter phone number',
+                    required: 'გთხოვთ შეიყვანოთ ტელეფონის ნომერი',
                     pattern: {
                       value: /^[\+]?[1-9][\d]{0,15}$/,
-                      message: 'Please enter a valid phone number'
+                      message: 'გთხოვთ შეიყვანოთ სწორი ტელეფონის ნომერი'
                     }
                   })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                  placeholder="+1 (555) 123-4567"
+                  placeholder="+995 (599) 12-34-56"
                 />
                 {errors.phone && (
                   <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
@@ -178,16 +178,16 @@ const DoctorForm = () => {
               
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address *
+                  ელ-ფოსტის მისამართი *
                 </label>
                 <input
                   type="email"
                   id="email"
                   {...register('email', { 
-                    required: 'Please enter email address',
+                    required: 'გთხოვთ შეიყვანოთ ელ-ფოსტის მისამართი',
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Please enter a valid email address'
+                      message: 'გთხოვთ შეიყვანოთ სწორი ელ-ფოსტის მისამართი'
                     }
                   })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
@@ -203,7 +203,7 @@ const DoctorForm = () => {
           {/* Profile Image URL */}
           <div>
             <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
-              Profile Image URL (Optional)
+              პროფილის სურათის URL (არასავალდებულო)
             </label>
             <input
               type="url"
@@ -211,7 +211,7 @@ const DoctorForm = () => {
               {...register('image', {
                 pattern: {
                   value: /^https?:\/\/.+\.(jpg|jpeg|png|gif|webp)$/i,
-                  message: 'Please enter a valid image URL'
+                  message: 'გთხოვთ შეიყვანოთ სწორი სურათის URL'
                 }
               })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
@@ -221,36 +221,36 @@ const DoctorForm = () => {
               <p className="mt-1 text-sm text-red-600">{errors.image.message}</p>
             )}
             <p className="mt-1 text-xs text-gray-500">
-              Leave empty to generate an avatar automatically
+              დატოვეთ ცარიელი ავტომატური ავატარის გენერირებისთვის
             </p>
           </div>
 
           {/* Availability Status */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Availability Status
+              ხელმისაწვდომობის სტატუსი
             </label>
-                       <div className="flex items-center space-x-6">
-             <label className="flex items-center">
-               <input
-                 type="radio"
-                 {...register('available')}
-                 value="true"
-                 defaultChecked
-                 className="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300"
-               />
-               <span className="ml-2 text-sm text-gray-700">Available</span>
-             </label>
-             <label className="flex items-center">
-               <input
-                 type="radio"
-                 {...register('available')}
-                 value="false"
-                 className="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300"
-               />
-               <span className="ml-2 text-sm text-gray-700">Busy</span>
-             </label>
-           </div>
+            <div className="flex items-center space-x-6">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  {...register('available')}
+                  value="true"
+                  defaultChecked
+                  className="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300"
+                />
+                <span className="ml-2 text-sm text-gray-700">ხელმისაწვდომი</span>
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  {...register('available')}
+                  value="false"
+                  className="focus:ring-primary-500 h-4 w-4 text-primary-600 border-gray-300"
+                />
+                <span className="ml-2 text-sm text-gray-700">დაკავებული</span>
+              </label>
+            </div>
           </div>
 
           {/* Submit Button */}
@@ -260,7 +260,7 @@ const DoctorForm = () => {
               onClick={() => navigate('/doctors')}
               className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
             >
-              Cancel
+              გაუქმება
             </button>
             <button
               type="submit"
@@ -270,10 +270,10 @@ const DoctorForm = () => {
               {isSubmitting ? (
                 <div className="flex items-center">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                  Adding Doctor...
+                  ექიმის დამატება...
                 </div>
               ) : (
-                'Add Doctor'
+                'ექიმის დამატება'
               )}
             </button>
           </div>

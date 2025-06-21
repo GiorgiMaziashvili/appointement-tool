@@ -3,7 +3,7 @@ import { cancelAppointment, updateAppointmentStatus } from '../utils/localStorag
 
 const AppointmentCard = ({ appointment, onUpdate }) => {
   const handleCancel = () => {
-    if (window.confirm('Are you sure you want to cancel this appointment?')) {
+    if (window.confirm('დარწმუნებული ხართ, რომ გსურთ ამ ვიზიტის გაუქმება?')) {
       cancelAppointment(appointment.id);
       onUpdate();
     }
@@ -29,9 +29,24 @@ const AppointmentCard = ({ appointment, onUpdate }) => {
     }
   };
 
+  const getStatusText = (status) => {
+    switch (status) {
+      case 'scheduled':
+        return 'დაგეგმილი';
+      case 'completed':
+        return 'დასრულებული';
+      case 'cancelled':
+        return 'გაუქმებული';
+      case 'in-progress':
+        return 'მიმდინარე';
+      default:
+        return status;
+    }
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
+    return date.toLocaleDateString('ka-GE', {
       weekday: 'short',
       year: 'numeric',
       month: 'short',
@@ -43,10 +58,10 @@ const AppointmentCard = ({ appointment, onUpdate }) => {
     const [hours, minutes] = timeString.split(':');
     const date = new Date();
     date.setHours(parseInt(hours), parseInt(minutes));
-    return date.toLocaleTimeString('en-US', {
+    return date.toLocaleTimeString('ka-GE', {
       hour: 'numeric',
       minute: '2-digit',
-      hour12: true
+      hour12: false
     });
   };
 
@@ -60,7 +75,7 @@ const AppointmentCard = ({ appointment, onUpdate }) => {
                 {appointment.doctorName}
               </h3>
               <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(appointment.status)}`}>
-                {appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
+                {getStatusText(appointment.status)}
               </span>
             </div>
             
@@ -69,7 +84,7 @@ const AppointmentCard = ({ appointment, onUpdate }) => {
                 <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                Patient: {appointment.patientName}
+                პაციენტი: {appointment.patientName}
               </div>
               
               <div className="flex items-center text-sm text-gray-600">
@@ -104,19 +119,19 @@ const AppointmentCard = ({ appointment, onUpdate }) => {
               onClick={() => handleStatusChange('in-progress')}
               className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors duration-200"
             >
-              Start
+              დაწყება
             </button>
             <button
               onClick={() => handleStatusChange('completed')}
               className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200"
             >
-              Complete
+              დასრულება
             </button>
             <button
               onClick={handleCancel}
               className="inline-flex items-center px-3 py-1.5 border border-red-300 text-xs font-medium rounded-md text-red-700 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200"
             >
-              Cancel
+              გაუქმება
             </button>
           </div>
         )}
@@ -127,13 +142,13 @@ const AppointmentCard = ({ appointment, onUpdate }) => {
               onClick={() => handleStatusChange('completed')}
               className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200"
             >
-              Complete
+              დასრულება
             </button>
             <button
               onClick={handleCancel}
               className="inline-flex items-center px-3 py-1.5 border border-red-300 text-xs font-medium rounded-md text-red-700 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200"
             >
-              Cancel
+              გაუქმება
             </button>
           </div>
         )}
@@ -144,7 +159,7 @@ const AppointmentCard = ({ appointment, onUpdate }) => {
               <svg className="w-4 h-4 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
-              <span className="text-sm text-red-700 font-medium">This appointment has been cancelled</span>
+              <span className="text-sm text-red-700 font-medium">ეს ვიზიტი გაუქმებულია</span>
             </div>
           </div>
         )}
@@ -155,7 +170,7 @@ const AppointmentCard = ({ appointment, onUpdate }) => {
               <svg className="w-4 h-4 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span className="text-sm text-green-700 font-medium">Appointment completed successfully</span>
+              <span className="text-sm text-green-700 font-medium">ვიზიტი წარმატებით დასრულდა</span>
             </div>
           </div>
         )}
