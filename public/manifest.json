@@ -1,0 +1,46 @@
+{
+  "short_name": "კლინიკაპრო",
+  "name": "კლინიკაპრო - სამედიცინო კლინიკის მართვა",
+  "description": "თანამედროვე სამედიცინო კლინიკის მართვის სისტემა",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#22c55e",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ka",
+  "categories": ["medical", "healthcare", "productivity"],
+  "screenshots": [
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "კლინიკაპრო დესკტოპ ვერსია"
+    },
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "კლინიკაპრო მობილური ვერსია"
+    }
+  ]
+} 
