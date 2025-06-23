@@ -57,21 +57,21 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     <>
       {/* Desktop sidebar */}
       <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-        <div className="flex-1 flex flex-col min-h-0 bg-white border-r border-gray-200">
-          <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-            <div className="flex items-center flex-shrink-0 px-4">
+        <div className="flex flex-col flex-1 min-h-0 bg-white border-r border-gray-200">
+          <div className="flex overflow-y-auto flex-col flex-1 pt-5 pb-4">
+            <div className="flex flex-shrink-0 items-center px-4">
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
+                <div className="flex justify-center items-center w-8 h-8 rounded-lg bg-primary-500">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <h1 className="ml-3 text-xl font-bold text-gray-900">
-                  კლინიკა<span className="text-primary-600">პრო</span>
+                  Med<span className="text-primary-600">Assistant</span>
                 </h1>
               </div>
             </div>
-            <nav className="mt-8 flex-1 px-2 space-y-1">
+            <nav className="flex-1 px-2 mt-8 space-y-1">
               {navigation.map((item) => {
                 const isActive = location.pathname === item.href;
                 return (
@@ -80,7 +80,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                     to={item.href}
                     className={`${
                       isActive
-                        ? 'bg-primary-50 border-r-2 border-primary-500 text-primary-700'
+                        ? 'border-r-2 bg-primary-50 border-primary-500 text-primary-700'
                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                     } group flex items-center px-2 py-2 text-sm font-medium rounded-l-md transition-colors duration-200`}
                   >
@@ -93,10 +93,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
               })}
             </nav>
           </div>
-          <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
+          <div className="flex flex-shrink-0 p-4 border-t border-gray-200">
             <div className="flex items-center">
-              <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
-                <span className="text-primary-600 text-sm font-medium">ა</span>
+              <div className="flex justify-center items-center w-8 h-8 rounded-full bg-primary-100">
+                <span className="text-sm font-medium text-primary-600">ა</span>
               </div>
               <div className="ml-3">
                 <p className="text-sm font-medium text-gray-700">ადმინისტრატორი</p>
@@ -109,33 +109,33 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
       {/* Mobile sidebar */}
       <div className={`fixed inset-0 flex z-50 md:hidden transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
-          <div className="absolute top-0 right-0 -mr-12 pt-2">
+        <div className="flex relative flex-col flex-1 w-full max-w-xs bg-white">
+          <div className="absolute top-0 right-0 pt-2 -mr-12">
             <button
               type="button"
-              className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className="flex justify-center items-center ml-1 w-10 h-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               onClick={() => setIsOpen(false)}
             >
               <span className="sr-only">გვერდითი პანელის დახურვა</span>
-              <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
-          <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-            <div className="flex-shrink-0 flex items-center px-4">
+          <div className="overflow-y-auto flex-1 pt-5 pb-4 h-0">
+            <div className="flex flex-shrink-0 items-center px-4">
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
+                <div className="flex justify-center items-center w-8 h-8 rounded-lg bg-primary-500">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <h1 className="ml-3 text-xl font-bold text-gray-900">
-                  კლინიკა<span className="text-primary-600">პრო</span>
+                  Med<span className="text-primary-600">Assistant</span>
                 </h1>
               </div>
             </div>
-            <nav className="mt-8 px-2 space-y-1">
+            <nav className="px-2 mt-8 space-y-1">
               {navigation.map((item) => {
                 const isActive = location.pathname === item.href;
                 return (
@@ -145,7 +145,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                     onClick={() => setIsOpen(false)}
                     className={`${
                       isActive
-                        ? 'bg-primary-50 border-r-2 border-primary-500 text-primary-700'
+                        ? 'border-r-2 bg-primary-50 border-primary-500 text-primary-700'
                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                     } group flex items-center px-2 py-2 text-base font-medium rounded-l-md transition-colors duration-200`}
                   >

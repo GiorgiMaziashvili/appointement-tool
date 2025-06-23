@@ -1,6 +1,6 @@
 {
-  "short_name": "კლინიკაპრო",
-  "name": "კლინიკაპრო - სამედიცინო კლინიკის მართვა",
+  "short_name": "MedAssistant",
+  "name": "MedAssistant - სამედიცინო კლინიკის მართვა",
   "description": "თანამედროვე სამედიცინო კლინიკის მართვის სისტემა",
   "icons": [
     {
@@ -33,14 +33,14 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "კლინიკაპრო დესკტოპ ვერსია"
+      "label": "MedAssistant დესკტოპ ვერსია"
     },
     {
       "src": "screenshot-mobile.png",
       "sizes": "375x812",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "კლინიკაპრო მობილური ვერსია"
+      "label": "MedAssistant მობილური ვერსია"
     }
   ]
 } 
