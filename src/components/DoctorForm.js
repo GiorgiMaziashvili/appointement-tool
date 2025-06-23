@@ -53,7 +53,7 @@ const DoctorForm = () => {
       // Convert availability string to boolean
       data.available = data.available === 'true';
 
-      addDoctor(data);
+      await addDoctor(data);
       setIsSuccess(true);
       reset();
       

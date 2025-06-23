@@ -12,10 +12,14 @@ const DoctorsList = () => {
     availability: 'all'
   });
 
-  const loadDoctors = () => {
-    const allDoctors = getDoctors();
-    setDoctors(allDoctors);
-    setFilteredDoctors(allDoctors);
+  const loadDoctors = async () => {
+    try {
+      const allDoctors = await getDoctors();
+      setDoctors(allDoctors);
+      setFilteredDoctors(allDoctors);
+    } catch (error) {
+      console.error('Error loading doctors:', error);
+    }
   };
 
   useEffect(() => {

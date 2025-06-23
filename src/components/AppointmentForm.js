@@ -29,8 +29,17 @@ const AppointmentForm = () => {
   });
 
   useEffect(() => {
-    const availableDoctors = getDoctors().filter(doctor => doctor.available);
-    setDoctors(availableDoctors);
+    const loadDoctors = async () => {
+      try {
+        const allDoctors = await getDoctors();
+        const availableDoctors = allDoctors.filter(doctor => doctor.available);
+        setDoctors(availableDoctors);
+      } catch (error) {
+        console.error('Error loading doctors:', error);
+      }
+    };
+
+    loadDoctors();
   }, []);
 
   const onSubmit = async (data) => {
@@ -45,7 +54,7 @@ const AppointmentForm = () => {
         createdAt: new Date().toISOString()
       };
 
-      saveAppointment(appointmentData);
+      await saveAppointment(appointmentData);
       setIsSuccess(true);
       reset();
       

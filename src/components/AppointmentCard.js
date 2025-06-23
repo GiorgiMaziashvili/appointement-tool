@@ -2,16 +2,24 @@ import React from 'react';
 import { cancelAppointment, updateAppointmentStatus } from '../utils/localStorage';
 
 const AppointmentCard = ({ appointment, onUpdate }) => {
-  const handleCancel = () => {
+  const handleCancel = async () => {
     if (window.confirm('დარწმუნებული ხართ, რომ გსურთ ამ ვიზიტის გაუქმება?')) {
-      cancelAppointment(appointment.id);
-      onUpdate();
+      try {
+        await cancelAppointment(appointment.id);
+        onUpdate();
+      } catch (error) {
+        console.error('Error cancelling appointment:', error);
+      }
     }
   };
 
-  const handleStatusChange = (newStatus) => {
-    updateAppointmentStatus(appointment.id, newStatus);
-    onUpdate();
+  const handleStatusChange = async (newStatus) => {
+    try {
+      await updateAppointmentStatus(appointment.id, newStatus);
+      onUpdate();
+    } catch (error) {
+      console.error('Error updating appointment status:', error);
+    }
   };
 
   const getStatusColor = (status) => {

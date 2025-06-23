@@ -12,22 +12,33 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    const doctors = getDoctors();
-    const appointments = getAppointments();
-    const today = new Date().toISOString().split('T')[0];
-    
-    const todayAppointments = appointments.filter(app => app.date === today);
-    const recentAppointments = appointments
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      .slice(0, 5);
+    const loadDashboardData = async () => {
+      try {
+        const [doctors, appointments] = await Promise.all([
+          getDoctors(),
+          getAppointments()
+        ]);
+        
+        const today = new Date().toISOString().split('T')[0];
+        
+        const todayAppointments = appointments.filter(app => app.date === today);
+        const recentAppointments = appointments
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          .slice(0, 5);
 
-    setStats({
-      totalDoctors: doctors.length,
-      availableDoctors: doctors.filter(d => d.available).length,
-      totalAppointments: appointments.length,
-      todayAppointments: todayAppointments.length,
-      recentAppointments
-    });
+        setStats({
+          totalDoctors: doctors.length,
+          availableDoctors: doctors.filter(d => d.available).length,
+          totalAppointments: appointments.length,
+          todayAppointments: todayAppointments.length,
+          recentAppointments
+        });
+      } catch (error) {
+        console.error('Error loading dashboard data:', error);
+      }
+    };
+
+    loadDashboardData();
   }, []);
 
   const StatCard = ({ title, value, icon, color, link }) => (

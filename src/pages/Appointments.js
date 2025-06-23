@@ -14,9 +14,13 @@ const Appointments = () => {
   });
   const [sortBy, setSortBy] = useState('date-desc');
 
-  const loadAppointments = () => {
-    const allAppointments = getAppointments();
-    setAppointments(allAppointments);
+  const loadAppointments = async () => {
+    try {
+      const allAppointments = await getAppointments();
+      setAppointments(allAppointments);
+    } catch (error) {
+      console.error('Error loading appointments:', error);
+    }
   };
 
   useEffect(() => {
